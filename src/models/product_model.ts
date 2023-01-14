@@ -25,7 +25,7 @@ export class Products {
     async show(id: number) : Promise<Product> {
         try {
             const connection = Client.connect()
-            const sql = 'SELECT FROM products WHERE id=$1;'
+            const sql = 'SELECT * FROM products WHERE id=$1;'
             const results = (await connection).query(sql, [id]);
             (await connection).release()
     
