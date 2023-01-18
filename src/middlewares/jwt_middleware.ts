@@ -16,9 +16,11 @@ const verifyAuthToken = (req: Request, res: Response, next: NextFunction) => {
 
         if(decoded){
             next()
-        } 
+        }else{ 
+            res.status(401).send('Invalid token, access denied.')
+        }
     } catch (error) {
-        res.status(401)
+        res.status(401).send('Invalid token, access denied.')
     }
 }
 
