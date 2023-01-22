@@ -29,3 +29,13 @@ export const createOrder = async (req: Request, res : Response) => {
         throw new Error(`error creating product : ${error}`)
     }
 }
+
+export const getUserOrder =async (req:Request, res: Response) => {
+    try {
+        const results = await orders.userOrder(parseInt(req.params.id))
+        res.send(results)
+    } catch (error) {
+        throw new Error(`Couldnt get user orders : ${error}`)
+    }
+    
+}

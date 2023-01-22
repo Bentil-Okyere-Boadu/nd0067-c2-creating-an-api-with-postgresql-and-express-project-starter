@@ -6,7 +6,7 @@ import ordersRouter from './routes/orders'
 import signIn from './services/signIn'
 import verifyAuthToken from './middlewares/jwt_middleware'
 
-const app: express.Application = express()
+export const app: express.Application = express()
 const address: string = "0.0.0.0:8000"
 
 app.use(bodyParser.json())

@@ -51,4 +51,17 @@ export class Orders {
             throw new Error(`error: ${error}`);
         }
     }
+
+    async userOrder(id: number) {
+        try {
+            const pool = Client.connect()
+            const sql = 'SELECT * FROM orders WHERE user_id=$1;'
+            const results = (await pool).query(sql, [id]);
+            (await pool).release()
+
+            return (await results).rows
+        } catch (error) {
+            throw new Error(`error: ${error}`);
+        }
+    }
 }
