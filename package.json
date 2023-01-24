@@ -5,10 +5,10 @@
   "main": "server.ts",
   "scripts": {
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "jasmine": "jasmine-ts",
+    "jasmine": "jasmine",
     "test": "ENV=test  && npx tsc && db-migrate --env test up && jasmine && db-migrate db:drop test",
     "build": "npx tsc",
-    "migrate": "db-migrate create orders --sql-file",
+    "migrate": "db-migrate create orders_products --sql-file",
     "migrate-up": "db-migrate up",
     "migrate-down": "db-migrate down"
   },
@@ -34,7 +34,6 @@
     "@types/supertest": "^2.0.12",
     "jasmine": "^3.6.4",
     "jasmine-spec-reporter": "^7.0.0",
-    "jasmine-ts": "^0.3.0",
     "nodemon": "^2.0.20",
     "supertest": "^6.3.3",
     "ts-node": "^9.1.1",
