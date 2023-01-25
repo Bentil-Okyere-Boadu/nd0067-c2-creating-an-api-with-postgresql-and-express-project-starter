@@ -29,3 +29,12 @@ export const getByProductId = async (req: Request, res: Response) => {
         
     }
 }
+
+export const createOrderProduct = async (req: Request, res: Response) => {
+    try {
+        const newOrderProduct = await order_product.createOrderProduct(req.body)
+        res.send(newOrderProduct)
+    } catch (error) {
+        
+    }
+}
