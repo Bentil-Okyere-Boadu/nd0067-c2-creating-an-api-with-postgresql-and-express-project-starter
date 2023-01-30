@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import CustomAPIError from "../errors/custom-error";
+import { StatusCodes } from "http-status-codes";
 
 dotenv.config()
 const { TOKEN_SECRET } = process.env
@@ -17,10 +19,10 @@ const verifyAuthToken = (req: Request, res: Response, next: NextFunction) => {
         if(decoded){
             next()
         }else{ 
-            res.status(401).send('Invalid token, access denied.')
+            next(new CustomAPIError('Invalid token, access denied.', StatusCodes.UNAUTHORIZED))
         }
     } catch (error) {
-        res.status(401).send('Invalid token, access denied.')
+        next(new CustomAPIError('Invalid token, access denied.', StatusCodes.UNAUTHORIZED))
     }
 }
 

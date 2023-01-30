@@ -21,7 +21,7 @@ export class Orders {
 
             return (await results).rows
         } catch (error) {
-            
+            throw new Error(`error: ${error}`);
         }
     }
 
@@ -34,7 +34,7 @@ export class Orders {
 
             return (await results).rows[0]
         } catch (error) {
-            
+            throw new Error(`error: ${error}`);
         }
     }
 

@@ -1,13 +1,15 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import Client from "../database";
+import { StatusCodes } from "http-status-codes";
+import CustomAPIError from "../errors/custom-error";
 
 dotenv.config()
 const { TOKEN_SECRET, BCRYPT_PASSWORD } = process.env
 
-const signIn = async (req: Request, res: Response ) => {
+const signIn = async (req: Request, res: Response, next: NextFunction ) => {
     try {
       const { firstname, password } = req.body
     //@ts-ignore
@@ -16,7 +18,7 @@ const signIn = async (req: Request, res: Response ) => {
     const results = (await pool).query(sql,[firstname])
     const user = JSON.parse(JSON.stringify( (await results).rows[0]))
     if(!user){
-        res.status(401).send('User does not exist')
+        next(new CustomAPIError('User does not exist', StatusCodes.NOT_FOUND))
     }
     
     const pass = await bcrypt.compare( password+BCRYPT_PASSWORD , user.password)
@@ -24,13 +26,13 @@ const signIn = async (req: Request, res: Response ) => {
     if(user && pass){
         // @ts-ignore
         const token = jwt.sign(user, TOKEN_SECRET)
-        res.send({user: user , token: token})
+        res.status(StatusCodes.OK).send({user: user , token: token})
     } else{
-        res.status(401).send('Invalid password')
+        next(new CustomAPIError('Invalid password', StatusCodes.NOT_FOUND))
     }
   
     } catch (error) {
-        throw new Error(`error signing in : ${error}`)
+        next(new CustomAPIError(`Something went wrong.`, StatusCodes.INTERNAL_SERVER_ERROR))        
     }
     
 }
