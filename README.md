@@ -1,5 +1,7 @@
 # Storefront Backend Project
 
+## Instructions on how to set up and run this project is in the INSTRUCTIONS.md file.
+
 ## Getting Started
 
 This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
