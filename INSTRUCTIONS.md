@@ -29,7 +29,7 @@
 | post /login  | { 'firstname': 'tom', 'password': 'password'}|User login|
 | get /users  |                                            |Get all Users |
 | get /users/:id  |  integer                                      |Get specific user |
-| post /users  |   { 'firstname':"tom", 'lastname': "kuku",'password':"password"}                |Get specific user |
+| post /users  |   { 'firstname':"tom", 'lastname': "kuku",'password':"password"}                | Create user |
 | post /orders | {"product_id": 3,"quantity": 2,"user_id": 1,"status":"completed"} | create new order |
 |get /orders | | Get all orders |
 |get /orders/:id | integer | get order by id|
