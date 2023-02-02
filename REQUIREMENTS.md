@@ -2,29 +2,6 @@
 The company stakeholders want to create an online storefront to showcase their great product ideas. Users need to be able to browse an index of all products, see the specifics of a single product, and add products to an order that they can view in a cart page. 
 This document describes what endpoints the API supplies, as well as data shapes to meet the requirements of the application. 
 
-## API Endpoints
-#### Products
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
-
-#### Users
-- Index [token required]
-- Show [token required]
-- Create new user[token required]
-
-#### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
-
-#### Orders_Products
-- Get all orders_products [token required]
-- Get records by orderId (args: orderid)[token required]
-- Get records by productId (args: productid)[token required]
-- Create order_product record [token required]
-
 
 ## Data Shapes
 #### Product
@@ -55,17 +32,17 @@ This document describes what endpoints the API supplies, as well as data shapes 
 | -----------   | -----------   |----------- |
 |[GET]  /            |                 |Displays 'Welcome to StoreFront API       |
 | [POST] /login  | { 'firstname': 'tom', 'password': 'password'}|User login|
-| [GET] /users  |                                            |Get all Users |
-| [GET] /users/:id  |  integer                                      |Get specific user |
-| [POST] /users  |   { 'firstname':"tom", 'lastname': "kuku",'password':"password"}                |Get specific user |
-| [POST] /orders | {"product_id": 3,"quantity": 2,"user_id": 1,"status":"completed"} | create new order |
-|[GET] /orders | | Get all orders |
-|[GET] /orders/:id | integer | get order by id|
+| [GET] /users  |      [token required]                                      |Get all Users |
+| [GET] /users/:id  |  integer   [token required]                                   |Get specific user |
+| [POST] /users  |   { 'firstname':"tom", 'lastname': "kuku",'password':"password"}                |Create user |
+| [POST] /orders | {"product_id": 3,"quantity": 2,"user_id": 1,"status":"completed"} [token required]| create new order |
+|[GET] /orders |[token required] | Get all orders |
+|[GET] /orders/:id | integer [token required] | get order by id|
 | [GET] /products | | Get all products |
 | [GET] /products/:id | integer | get product by id |
-| [POST] /products | {    "name": "Aloe Vera ultra soap","price": 20,      "category": "soap" } | create new product |
-|[GET] /orders/user/:id | integer | Get user's order |
-| [POST] /order-product | { "orderId": 2,"productId": 1}| Create order-product record |
-|[GET] /order-product/product/:id | integer | Get orders of a product |
-| [GET] /order-product/order/:id | integer | Get products of an order |
-| [GET] /order-product | | gets all order-product records |
+| [POST] /products | {    "name": "Aloe Vera ultra soap","price": 20,      "category": "soap" } [token required]| create new product |
+|[GET] /orders/user/:id | integer [token required]| Get user's order |
+| [POST] /order-product | { "orderId": 2,"productId": 1} [token required]| Create order-product record |
+|[GET] /order-product/product/:id | integer [token required]| Get orders of a product |
+| [GET] /order-product/order/:id | integer [token required]| Get products of an order |
+| [GET] /order-product | | gets all order-product records [token required]|
