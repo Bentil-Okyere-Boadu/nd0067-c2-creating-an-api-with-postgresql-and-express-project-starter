@@ -14,7 +14,7 @@ const address: string = "0.0.0.0:8000"
 app.use(bodyParser.json())
 
 app.use('/products', productsRouter)
-app.use('/users', verifyAuthToken, usersRouter)
+app.use('/users', usersRouter)
 app.use('/orders', verifyAuthToken, ordersRouter)
 app.use('/order-product', verifyAuthToken, orderProductRouter)
 
