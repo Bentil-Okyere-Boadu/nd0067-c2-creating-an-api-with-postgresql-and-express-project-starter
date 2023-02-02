@@ -1,26 +1,9 @@
 # Instructions to get this project up and running.
 
-#### 1. Set env variables as presented in the .env.example 
-#### 2. Create a database.json file in your root directory and provide the following details.
-    {
-    "dev": {
-      "driver": "pg",
-      "host": your db host,
-      "database": dbname,
-      "user": database user,
-      "password": "password"
-    },
-    "test": {
-      "driver": "pg",
-      "host": your db host,
-      "database": "dbname_test",
-      "user": "database user",
-      "password": "password"
-    }
-  }
-#### 3. Run npm install or yarn install to install dependencies.
-#### 4. Run npm run watch to start server. Server runs on port 8000.
-#### 5. Run npm run test to run testing.
+#### 1. Set `env` variables as presented in the `.env.example` 
+#### 3. Run `npm install` or `yarn install` to install dependencies.
+#### 4. Run `npm run watch` to start server. Server runs on port `8000`.
+#### 5. Run `npm run test` to run testing.
 
 ## Endpoints
 | Endpoint      | params / body example |Description |

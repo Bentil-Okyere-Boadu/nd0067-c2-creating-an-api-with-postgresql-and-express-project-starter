@@ -1,7 +1,6 @@
 # API Requirements
-The company stakeholders want to create an online storefront to showcase their great product ideas. Users need to be able to browse an index of all products, see the specifics of a single product, and add products to an order that they can view in a cart page. You have been tasked with building the API that will support this application, and your coworker is building the frontend.
-
-These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application. 
+The company stakeholders want to create an online storefront to showcase their great product ideas. Users need to be able to browse an index of all products, see the specifics of a single product, and add products to an order that they can view in a cart page. 
+This document describes what endpoints the API supplies, as well as data shapes to meet the requirements of the application. 
 
 ## API Endpoints
 #### Products
@@ -14,29 +13,59 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Users
 - Index [token required]
 - Show [token required]
-- Create N[token required]
+- Create new user[token required]
 
 #### Orders
 - Current Order by user (args: user id)[token required]
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
 
+#### Orders_Products
+- Get all orders_products [token required]
+- Get records by orderId (args: orderid)[token required]
+- Get records by productId (args: productid)[token required]
+- Create order_product record [token required]
+
+
 ## Data Shapes
 #### Product
--  id
-- name
-- price
-- [OPTIONAL] category
+-  id: number
+- name: string
+- price: number
+- [OPTIONAL] category: string
 
 #### User
-- id
-- firstName
-- lastName
-- password
+- id: number
+- firstName: string
+- lastName: string
+- password: string
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+- id: number
+- id of each product in the order: number
+- quantity of each product in the order: number
+- user_id: number
+- status of order (active or complete): string
 
+#### Orders_Products
+- orderId: number
+- productId: number
+
+## Endpoints
+| Endpoint      | params / body example |Description |
+| -----------   | -----------   |----------- |
+|[GET]  /            |                 |Displays 'Welcome to StoreFront API       |
+| [POST] /login  | { 'firstname': 'tom', 'password': 'password'}|User login|
+| [GET] /users  |                                            |Get all Users |
+| [GET] /users/:id  |  integer                                      |Get specific user |
+| [POST] /users  |   { 'firstname':"tom", 'lastname': "kuku",'password':"password"}                |Get specific user |
+| [POST] /orders | {"product_id": 3,"quantity": 2,"user_id": 1,"status":"completed"} | create new order |
+|[GET] /orders | | Get all orders |
+|[GET] /orders/:id | integer | get order by id|
+| [GET] /products | | Get all products |
+| [GET] /products/:id | integer | get product by id |
+| [POST] /products | {    "name": "Aloe Vera ultra soap","price": 20,      "category": "soap" } | create new product |
+|[GET] /orders/user/:id | integer | Get user's order |
+| [POST] /order-product | { "orderId": 2,"productId": 1}| Create order-product record |
+|[GET] /order-product/product/:id | integer | Get orders of a product |
+| [GET] /order-product/order/:id | integer | Get products of an order |
+| [GET] /order-product | | gets all order-product records |
