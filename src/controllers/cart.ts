@@ -17,23 +17,6 @@ export const getAllOrdersProducts = async( req: Request, res: Response, next: Ne
     }
 }
 
-export const getByOrderId = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const ordersById =  await cart.getByOrderId(parseInt(req.params.orderId))
-        res.send(ordersById)
-    } catch (error) {
-        next(new CustomAPIError('Could not get orders by order ID', StatusCodes.BAD_REQUEST))
-    }
-}
-
-export const getByProductId = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const productsById =  await cart.getByProductId(parseInt(req.params.productId))
-        res.send(productsById)
-    } catch (error) {
-        next(new CustomAPIError('Could not get orders by product ID', StatusCodes.BAD_REQUEST))        
-    }
-}
 
 export const addToCart = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -46,7 +29,6 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
             const userId = parseInt(req.params.userId)
             const status = Order_Status.New;
             const newOrder: Order = await order.create({user_id: userId, status: status})
-    
             const newOrderProduct = await cart.addToCart({...req.body, orderId: newOrder.id})
             res.send(newOrderProduct)
         }
@@ -65,6 +47,23 @@ export const removeFromCart = async (req: Request, res: Response, next: NextFunc
     }
 }
 
-export const viewCart = async () => {
+export const updateQuantity = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const {productId, orderId} = req.params
+        const { quantity } = req.body
+        const result = await cart.updateQuantity(parseInt(orderId), parseInt(productId), +quantity )
+        res.send(result)
+    } catch (error) {
+        next(new CustomAPIError('Could not remove from cart.', StatusCodes.BAD_REQUEST))
+    }
+}
 
+export const viewCartForOrder = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { orderId } = req.params
+        const result = await cart.viewCart(parseInt(orderId))
+        res.send(result)
+    } catch (error) {
+        next(new CustomAPIError('Could not retrieve cart data for order.', StatusCodes.BAD_REQUEST))
+    }
 }
