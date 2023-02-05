@@ -1,4 +1,4 @@
-import { OrdersProducts } from "../src/models/order_product_model";
+import { OrdersProducts } from "../src/models/cart_model";
 import {app} from '../src/server'
 import supertest from "supertest";
 

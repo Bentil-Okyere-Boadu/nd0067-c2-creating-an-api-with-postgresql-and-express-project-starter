@@ -8,7 +8,7 @@
     "jasmine": "jasmine",
     "test": "ENV=test  && npx tsc && db-migrate --env test up && jasmine && db-migrate db:drop test",
     "build": "npx tsc",
-    "migrate": "db-migrate create [table_name] --sql-file",
+    "migrate": "db-migrate create cart --sql-file",
     "migrate-up": "db-migrate up",
     "migrate-down": "db-migrate down"
   },
