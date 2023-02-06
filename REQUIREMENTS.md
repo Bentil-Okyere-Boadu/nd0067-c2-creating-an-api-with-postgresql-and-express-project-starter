@@ -18,14 +18,13 @@ This document describes what endpoints the API supplies, as well as data shapes 
 
 #### Orders
 - id: number
-- id of each product in the order: number
-- quantity of each product in the order: number
 - user_id: number
 - status of order (active or complete): string
 
-#### Orders_Products
-- orderId: number
-- productId: number
+#### Cart
+- order_id: number
+- product_id: number
+- quantity: number
 
 ## Endpoints
 | Endpoint      | params / body example |Description |
@@ -35,14 +34,15 @@ This document describes what endpoints the API supplies, as well as data shapes 
 | [GET] /users  |      [token required]                                      |Get all Users |
 | [GET] /users/:id  |  integer   [token required]                                   |Get specific user |
 | [POST] /users  |   { 'firstname':"tom", 'lastname': "kuku",'password':"password"}                |Create user |
-| [POST] /orders | {"product_id": 3,"quantity": 2,"user_id": 1,"status":"completed"} [token required]| create new order |
+| [POST] /orders | {"user_id": 1,"status":"completed"} [token required]| Create new order |
 |[GET] /orders |[token required] | Get all orders |
-|[GET] /orders/:id | integer [token required] | get order by id|
+|[GET] /orders/:id | integer [token required] | Get order by id|
 | [GET] /products | | Get all products |
-| [GET] /products/:id | integer | get product by id |
-| [POST] /products | {    "name": "Aloe Vera ultra soap","price": 20,      "category": "soap" } [token required]| create new product |
+| [GET] /products/:id | integer | Get product by id |
+| [POST] /products | {    "name": "Aloe Vera ultra soap","price": 20,      "category": "soap" } [token required]| Create new product |
 |[GET] /orders/user/:id | integer [token required]| Get user's order |
-| [POST] /order-product | { "orderId": 2,"productId": 1} [token required]| Create order-product record |
-|[GET] /order-product/product/:id | integer [token required]| Get orders of a product |
-| [GET] /order-product/order/:id | integer [token required]| Get products of an order |
-| [GET] /order-product | | gets all order-product records [token required]|
+| [POST] /cart/:userId | { "productId": 1, "quantity": 2} [token required]| Add product to cart of a new order |
+| [POST] /cart/:userId | { "orderId": 2,"productId": 1, "quantity": 2} [token required]| Add to cart of an existing order |
+|[GET] /cart/product/:id | integer [token required]| Get orders of a product |
+| [GET] /cart/order/:id | integer [token required]| Get products of an order |
+| [GET] /cart | | gets all cart records [token required]|
