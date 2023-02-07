@@ -64,5 +64,16 @@ export class Orders {
         }
     }
 
-    //update order status
+    async updateStatus(status: Order_Status, id: number){
+        try {
+            const pool = Client.connect()
+            const sql = 'UPDATE orders SET status=$1 WHERE id=$2'
+            const results = (await pool).query(sql, [status, id]);
+            (await pool).release()
+
+            return (await results).rows
+        } catch (error) {
+            throw new Error(`error: ${error}`);
+        }
+    }
 }

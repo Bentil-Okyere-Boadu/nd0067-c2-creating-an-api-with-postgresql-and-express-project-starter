@@ -16,13 +16,13 @@ The application makes use of the following libraries:
 ## Setting up the database.
 
 #### 1. Create a database for the application. eg storeDb
-#### 2. Create a testing database. eg storeDB_test
-#### 3.  
+#### 2. Create a testing database. eg storeDb_test
+
 
 
 ## Instructions to get this project up and running.
 
-#### 1. Set `env` variables as presented in the `.env.example` 
+#### 1. Set `.env` variables as presented in the `.env.example` 
 #### 2. Run `npm install` or `yarn install` to install dependencies.
 #### 3. Run `npm run migrate-up` to run migrations on your database.
 #### 4. Run `npm run watch` to start server. Server runs on port `8000`.

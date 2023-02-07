@@ -16,7 +16,7 @@ describe('Product model tests', () => {
     })
 
     it('gets a product by ID', async () => {
-        const response = await request.get('/products/2')
+        const response = await request.get('/products/1')
         expect(response.status).toBe(200)
     })
 
@@ -25,6 +25,16 @@ describe('Product model tests', () => {
             name: 'Strawberry lip gloss',
             price: 10,
             category: 'Lip gloss'
+        }
+        const response = await request.post('/products').set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzM5NjUxNDd9.dZox71Z3bhpuqAKrnVc2pyFAVVmsLkvYososEf-Yg2U').send(data)
+        expect(response.status).toBe(200)
+    })
+
+    it('Creates a product', async () => {
+        const data = {
+            name: 'Aloe Vera Liquid Soap',
+            price: 40,
+            category: 'Soap'
         }
         const response = await request.post('/products').set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzM5NjUxNDd9.dZox71Z3bhpuqAKrnVc2pyFAVVmsLkvYososEf-Yg2U').send(data)
         expect(response.status).toBe(200)

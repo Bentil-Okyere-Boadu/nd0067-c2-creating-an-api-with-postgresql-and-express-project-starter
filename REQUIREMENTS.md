@@ -43,6 +43,7 @@ This document describes what endpoints the API supplies, as well as data shapes 
 |[GET] /orders/user/:id | integer [token required]| Get user's order |
 | [POST] /cart/:userId | { "productId": 1, "quantity": 2} [token required]| Add product to cart of a new order |
 | [POST] /cart/:userId | { "orderId": 2,"productId": 1, "quantity": 2} [token required]| Add to cart of an existing order |
-|[GET] /cart/product/:id | integer [token required]| Get orders of a product |
 | [GET] /cart/order/:id | integer [token required]| Get products of an order |
 | [GET] /cart | | gets all cart records [token required]|
+| [DELETE] /cart/:orderId/:productId | | Remove product from order cart [token required]|
+| [PUT] /cart/:orderId/:productId | { "quantity": 4} | Change the quantity of a product in an order.[token required]|

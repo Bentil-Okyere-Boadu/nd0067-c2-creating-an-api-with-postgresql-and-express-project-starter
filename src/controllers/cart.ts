@@ -24,6 +24,8 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
 
         if(orderId){
             const newOrderProduct = await cart.addToCart(req.body)
+            const status = Order_Status.Processing
+            await order.updateStatus(status, orderId)
             res.send(newOrderProduct)
         } else {
             const userId = parseInt(req.params.userId)
@@ -33,7 +35,7 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
             res.send(newOrderProduct)
         }
     } catch (error) {
-        next(new CustomAPIError('Could not add to cart.', StatusCodes.BAD_REQUEST))
+        next(new CustomAPIError('Could not add to cart.', StatusCodes.CONFLICT))
     }
 }
 

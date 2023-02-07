@@ -52,8 +52,8 @@ export class Carts {
     async removeFromCart(orderId: number, productId : number){
         try {
             const pool =Client.connect()
-            const sql = 'DELETE FROM cart where order_id=$1 AND product_id=$2;'
-            const results = (await pool).query(sql, [orderId, productId]);
+            const sql = 'DELETE FROM cart where order_id=$1 AND product_id=$2;';
+            (await pool).query(sql, [orderId, productId]);
             (await pool).release()
 
             return `Product was removed from cart successfully.`
@@ -65,8 +65,8 @@ export class Carts {
     async updateQuantity(orderId: number, productId : number, quantity:number ){
         try {
             const pool =Client.connect()
-            const sql = 'UPDATE cart SET quantity=$3 where order_id=$1 AND product_id=$2;'
-            const results = (await pool).query(sql, [orderId, productId, quantity]);
+            const sql = 'UPDATE cart SET quantity=$3 where order_id=$1 AND product_id=$2;';
+            (await pool).query(sql, [orderId, productId, quantity]);
             (await pool).release()
 
             return `Quantity updated successfully`

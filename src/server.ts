@@ -5,7 +5,7 @@ import usersRouter from './routes/users'
 import ordersRouter from './routes/orders'
 import signIn from './services/signIn'
 import verifyAuthToken from './middlewares/jwt_middleware'
-import orderProductRouter from './routes/cart'
+import cartRouter from './routes/cart'
 import errorHandler from './middlewares/error_middleware'
 
 export const app: express.Application = express()
@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 app.use('/products', productsRouter)
 app.use('/users', usersRouter)
 app.use('/orders', verifyAuthToken, ordersRouter)
-app.use('/cart', verifyAuthToken, orderProductRouter)
+app.use('/cart', verifyAuthToken, cartRouter)
 
 app.post('/login',signIn)
 
