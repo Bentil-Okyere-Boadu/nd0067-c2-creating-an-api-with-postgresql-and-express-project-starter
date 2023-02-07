@@ -34,7 +34,7 @@ This document describes what endpoints the API supplies, as well as data shapes 
 | [GET] /users  |      [token required]                                      |Get all Users |
 | [GET] /users/:id  |  integer   [token required]                                   |Get specific user |
 | [POST] /users  |   { 'firstname':"tom", 'lastname': "kuku",'password':"password"}                |Create user |
-| [POST] /orders | {"user_id": 1,"status":"completed"} [token required]| Create new order |
+| [POST] /orders | {"user_id": 1,"status":"Complete"} [token required]| Create new order |
 |[GET] /orders |[token required] | Get all orders |
 |[GET] /orders/:id | integer [token required] | Get order by id|
 | [GET] /products | | Get all products |
@@ -47,3 +47,5 @@ This document describes what endpoints the API supplies, as well as data shapes 
 | [GET] /cart | | gets all cart records [token required]|
 | [DELETE] /cart/:orderId/:productId | | Remove product from order cart [token required]|
 | [PUT] /cart/:orderId/:productId | { "quantity": 4} | Change the quantity of a product in an order.[token required]|
+
+Valid order statuses = "New", "Complete", "Failed", "In-process"
