@@ -15,6 +15,8 @@ The application makes use of the following libraries:
 
 ## Setting up the database.
 
+#### NOTE:  Database runs on port 5432 
+
 #### 1. Create a database for the application. eg storeDb
 #### 2. Create a testing database. eg storeDb_test
 
