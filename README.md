@@ -15,7 +15,9 @@ The application makes use of the following libraries:
 
 ## Setting up the database.
 
-#### `NOTE`:  Database runs on port 5432 or port specified in the POSTGRES_PORT env variable.
+#### `NOTE`: 
+- Database runs on port 5432 or port specified in the POSTGRES_PORT env variable. 
+- Application runs on port specified in the PORT env variable.
 
 #### 1. Create a database for the application. eg storeDb
 #### 2. Create a testing database. eg storeDb_test

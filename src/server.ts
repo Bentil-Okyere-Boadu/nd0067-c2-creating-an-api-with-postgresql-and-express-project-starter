@@ -9,7 +9,7 @@ import cartRouter from './routes/cart'
 import errorHandler from './middlewares/error_middleware'
 
 export const app: express.Application = express()
-const address: string = "0.0.0.0:8000"
+const port : number = process.env.PORT? parseInt(process.env.PORT) : 8000;
 
 app.use(bodyParser.json())
 
@@ -26,6 +26,6 @@ app.get('/', function (req: Request, res: Response) {
 
 app.use(errorHandler)
 
-app.listen(8000, function () {
-    console.log(`starting app on: ${address}`)
+app.listen(port, function () {
+    console.log(`starting app on: ${port}`)
 })
