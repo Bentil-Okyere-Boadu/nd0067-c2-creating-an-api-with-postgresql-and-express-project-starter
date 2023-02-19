@@ -6,6 +6,13 @@ const request = supertest(app)
 const orders = new Orders()
 
 describe('Order model tests', () => {
+    let token = "Bearer "
+    
+    beforeAll( async () => {
+        const response = await request.post('/login').send({ firstname: 'tom', password: 'password'})
+        token = token + response.body.token
+    })
+
     it('Checks if index is defined', () => {
         expect(orders.index()).toBeDefined()
     })
@@ -16,26 +23,26 @@ describe('Order model tests', () => {
             status: "new"
         }
         const response = await request.post('/orders')
-        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzM5NjUxNDd9.dZox71Z3bhpuqAKrnVc2pyFAVVmsLkvYososEf-Yg2U')
+        .set('Authorization', token)
         .send(data)
         expect(response.status).toBe(200)
     })
 
     it('gets all orders', async () => {
         const response = await request.get('/orders')
-        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzM5NjUxNDd9.dZox71Z3bhpuqAKrnVc2pyFAVVmsLkvYososEf-Yg2U')
+        .set('Authorization', token)
         expect(response.status).toBe(200)
     })
 
     it('gets an order by ID', async () => {
         const response = await request.get('/orders/1')
-        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzM5NjUxNDd9.dZox71Z3bhpuqAKrnVc2pyFAVVmsLkvYososEf-Yg2U')
+        .set('Authorization', token)
         expect(response.status).toBe(200)
     })
 
     it('gets a users order', async () => {
         const response = await request.get('/orders/user/1')
-        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzM5NjUxNDd9.dZox71Z3bhpuqAKrnVc2pyFAVVmsLkvYososEf-Yg2U')
+        .set('Authorization', token)
         expect(response.status).toBe(200)
     })
 })

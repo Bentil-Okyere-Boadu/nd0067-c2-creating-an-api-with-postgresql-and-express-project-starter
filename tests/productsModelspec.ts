@@ -6,6 +6,13 @@ const request = supertest(app)
 const products = new Products()
 
 describe('Product model tests', () => {
+    let token = "Bearer "
+    
+    beforeAll( async () => {
+        const response = await request.post('/login').send({ firstname: 'tom', password: 'password'})
+        token = token + response.body.token
+    })
+
     it('Checks if index is defined', () => {
         expect(products.index()).toBeDefined()
     })
@@ -26,7 +33,7 @@ describe('Product model tests', () => {
             price: 10,
             category: 'Lip gloss'
         }
-        const response = await request.post('/products').set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzM5NjUxNDd9.dZox71Z3bhpuqAKrnVc2pyFAVVmsLkvYososEf-Yg2U').send(data)
+        const response = await request.post('/products').set('Authorization', token).send(data)
         expect(response.status).toBe(200)
     })
 
@@ -36,7 +43,7 @@ describe('Product model tests', () => {
             price: 40,
             category: 'Soap'
         }
-        const response = await request.post('/products').set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzM5NjUxNDd9.dZox71Z3bhpuqAKrnVc2pyFAVVmsLkvYososEf-Yg2U').send(data)
+        const response = await request.post('/products').set('Authorization', token).send(data)
         expect(response.status).toBe(200)
     })
 })
