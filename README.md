@@ -12,6 +12,7 @@ The application makes use of the following libraries:
 - db-migrate from npm for migrations
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
+- supertest for endpoint testing
 
 ## Setting up the database.
 
@@ -30,5 +31,10 @@ The application makes use of the following libraries:
 #### 2. Run `npm install` or `yarn install` to install dependencies.
 #### 3. Run `npm run migrate-up` to run migrations on your database.
 #### 4. Run `npm run watch` to start server. Server runs on port `8000`.
-#### 5. Run `npm run test` to run testing.
+
+## Instructions for running tests
+
+#### 1. Make sure project is not running on your assigned port.
+#### 2. Change the value of `ENV` variable in the .env file to `test`.
+#### 3. Run `npm run test` to run testing.
 
