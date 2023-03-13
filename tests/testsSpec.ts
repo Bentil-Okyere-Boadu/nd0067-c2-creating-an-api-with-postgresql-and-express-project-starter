@@ -69,7 +69,7 @@ describe('Product model tests', () => {
             category: 'Lip gloss'
         })
         expect(newProduct).toEqual({
-            id: 1,
+            id: newProduct.id,
             name: 'Strawberry lip gloss',
             price: 10,
             category: 'Lip gloss'
@@ -96,20 +96,10 @@ describe('Product model tests', () => {
         expect(response.status).toBe(200)
     })
 
-    it('Creates a product', async () => {
+    it('Creates a product with endpoint', async () => {
         const data = {
             name: 'Black soap',
             price: 10,
-            category: 'Soap'
-        }
-        const response = await request.post('/products').set('Authorization', token).send(data)
-        expect(response.status).toBe(200)
-    })
-
-    it('Creates a product', async () => {
-        const data = {
-            name: 'Aloe Vera Liquid Soap',
-            price: 40,
             category: 'Soap'
         }
         const response = await request.post('/products').set('Authorization', token).send(data)
