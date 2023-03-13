@@ -16,11 +16,11 @@ const orders = new Orders()
 
 describe('User model tests', () => {
     let token = "Bearer "
-    
-    beforeAll( async () => {
-        await users.create({firstname:'tom', lastname: 'kuku', password: 'password'})
 
-        const response = await request.post('/login').send({ firstname: 'tom', password: 'password'})
+    beforeAll(async () => {
+        await users.create({ firstname: 'tom', lastname: 'kuku', password: 'password' })
+
+        const response = await request.post('/login').send({ firstname: 'tom', password: 'password' })
         token = token + response.body.token
     })
 
@@ -52,9 +52,9 @@ describe('User model tests', () => {
 
 describe('Product model tests', () => {
     let token = "Bearer "
-    
-    beforeAll( async () => {
-        const response = await request.post('/login').send({ firstname: 'tom', password: 'password'})
+
+    beforeAll(async () => {
+        const response = await request.post('/login').send({ firstname: 'tom', password: 'password' })
         token = token + response.body.token
     })
 
@@ -62,8 +62,22 @@ describe('Product model tests', () => {
         expect(products.index()).toBeDefined()
     })
 
+    it('creates a product', async () => {
+        const newProduct = await products.create({
+            name: 'Strawberry lip gloss',
+            price: 10,
+            category: 'Lip gloss'
+        })
+        expect(newProduct).toEqual({
+            id: 1,
+            name: 'Strawberry lip gloss',
+            price: 10,
+            category: 'Lip gloss'
+        })
+    })
+
     it('View a product', async () => {
-        const addedProduct : Product = await products.show(1)
+        const addedProduct: Product = await products.show(1)
         expect(addedProduct).toEqual({
             id: 1,
             name: 'Strawberry lip gloss',
@@ -105,13 +119,13 @@ describe('Product model tests', () => {
 
 describe(`cart tests`, () => {
     let token = "Bearer "
-    
-    beforeAll( async () => {
-        const response = await request.post('/login').send({ firstname: 'tom', password: 'password'})
+
+    beforeAll(async () => {
+        const response = await request.post('/login').send({ firstname: 'tom', password: 'password' })
         token = token + response.body.token
     })
-   
-    it(`Checks if the getAll() method exists for cart`, () =>{
+
+    it(`Checks if the getAll() method exists for cart`, () => {
         expect(cart.getAll()).toBeDefined()
     })
 
@@ -120,31 +134,31 @@ describe(`cart tests`, () => {
             quantity: 2,
             productId: 1,
         }
-       const response = await request.post('/cart/1')
-       .set('Authorization', token)
-       .send(data)
-       expect(response.statusCode).toBe(200)
+        const response = await request.post('/cart/1')
+            .set('Authorization', token)
+            .send(data)
+        expect(response.statusCode).toBe(200)
     })
 
     it(`Gets all carts records`, async () => {
-       const response = await request.get('/cart')
-       .set('Authorization', token)
-       expect(response.statusCode).toBe(200)
+        const response = await request.get('/cart')
+            .set('Authorization', token)
+        expect(response.statusCode).toBe(200)
     })
 
     it(`Get all order with id=1 in cart`, async () => {
-       const response = await request.get('/cart/order/1')
-       .set('Authorization', token)
-       expect(response.statusCode).toBe(200)
+        const response = await request.get('/cart/order/1')
+            .set('Authorization', token)
+        expect(response.statusCode).toBe(200)
     })
 
 })
 
 describe('Order model tests', () => {
     let token = "Bearer "
-    
-    beforeAll( async () => {
-        const response = await request.post('/login').send({ firstname: 'tom', password: 'password'})
+
+    beforeAll(async () => {
+        const response = await request.post('/login').send({ firstname: 'tom', password: 'password' })
         token = token + response.body.token
     })
 
@@ -158,26 +172,26 @@ describe('Order model tests', () => {
             status: "new"
         }
         const response = await request.post('/orders')
-        .set('Authorization', token)
-        .send(data)
+            .set('Authorization', token)
+            .send(data)
         expect(response.status).toBe(200)
     })
 
     it('gets all orders', async () => {
         const response = await request.get('/orders')
-        .set('Authorization', token)
+            .set('Authorization', token)
         expect(response.status).toBe(200)
     })
 
     it('gets an order by ID', async () => {
         const response = await request.get('/orders/1')
-        .set('Authorization', token)
+            .set('Authorization', token)
         expect(response.status).toBe(200)
     })
 
     it('gets a users order', async () => {
         const response = await request.get('/orders/user/1')
-        .set('Authorization', token)
+            .set('Authorization', token)
         expect(response.status).toBe(200)
     })
 })
